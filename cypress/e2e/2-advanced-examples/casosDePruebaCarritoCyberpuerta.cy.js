@@ -16,7 +16,7 @@ describe('Primer conjunto de casos de prueba', function(){
                 cy.log(precio)
 
                 if($el.attr('title') === 'SSD Western Digital WD Blue' && precio.includes('$2,199.00')){
-                    cy.log('Se ha encontrado el elemento y precio buscado')
+                    cy.log('Se ha encontrado el elemento y precio')
                     cy.get('@dailyoffers').eq(index).contains('Add to cart').click()
                 }
             })
