@@ -1,0 +1,21 @@
+{
+  "nombre":"Pedro",
+  "apellido":"Torres",
+  "email":"cypress@ateneconocimientos.net",
+  "sexo":"Male",
+  "telefono":"3333333333",
+  "fechaDeNacimiento":[
+    "April",
+    "1999",
+    "13"
+  ],
+  "materia":"English",
+  "hobbies":[
+    "Sports",
+    "Music"
+  ],
+  "imagen":"my-image.png",
+  "direccion":"Alguna dirección ficticia",
+  "estado":"NCR",
+  "ciudad":"Delhi"
+}

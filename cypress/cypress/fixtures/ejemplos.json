@@ -1,0 +1,12 @@
+{
+  "nombre":"Juan",
+  "apellido":"Torres",
+  "email":"cypress@ateneconocimientos.net",
+  "sexo":"1",
+  "contra":"123456",
+  "fechaDeNacimiento":[
+    "1",
+    "abr",
+    "2000"
+  ]
+}
