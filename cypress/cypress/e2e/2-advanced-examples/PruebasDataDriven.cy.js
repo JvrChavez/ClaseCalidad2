@@ -69,6 +69,7 @@ describe('Segundo conjunto de casos de pruebas avanzadas',function(){
         cy.get('td:contains(Hobbies)+td').should('have.text',this.datos.hobbies[0]+", "+this.datos.hobbies[1])
         cy.get('td:contains(Address)+td').should('have.text',this.datos.direccion)
         cy.get('td:contains(State and City)+td').should('have.text',this.datos.estado+" "+this.datos.ciudad)
+        //Prueba para ver que github funciona
 
     })
 })
