@@ -49,7 +49,7 @@ describe('Segundo conjunto de casos de pruebas avanzadas',function(){
         })
         cy.get('#currentAddress').type(this.datos.direccion)
 
-        /cy.get('#state').click()
+        cy.get('#state').click()
         cy.get('div[class*=" css-26l3qy-menu"]').contains(this.datos.estado).click()
         cy.get('#city').click()
         cy.get('div[class*="menu"]').contains(this.datos.ciudad).click()
