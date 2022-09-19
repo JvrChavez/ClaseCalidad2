@@ -2,6 +2,11 @@
     "telefono1":"HTC Touch HD",
     "telefono2":"iPhone",
     "telefono3":"Palm Treo Pro",
+    "telefonos":[
+        "HTC Touch HD",
+        "iPhone",
+        "Palm Treo Pro"
+    ],
 
     "PC1":"Intel Core i5 2.30GHz, 8GB, 256GB SSD, Plata (Septiembre 2017)",
     "PC2":"Apple M1, 8GB, 512GB SSD, Verde (Abril 2021)"
