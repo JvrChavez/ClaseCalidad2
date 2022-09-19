@@ -16,23 +16,27 @@ describe('Tercer feature de acass avanzados',function(){
         cy.get("#menu ul a:contains('Phones & PDAs')").click()
         cy.get("div[class='product-thumb']").as("contenedorDeProductos")
         cy.get("@contenedorDeProductos")
-        cy.get('div[class="product-thumb"]:has(.description)/*:contains(HTC Touch HD)')
+        .find('.description')
+        //cy.get('div[class="product-thumb"]:has(.description)/*:contains(HTC Touch HD)')
         .each(($el, index, $list) => {
-            cy.get(':contains(HTC Touch HD)').eq(index).then(function($el1){
+            cy.get('@contenedorDeProductos').eq(index).then(function($el1){
                 let producto = $el1.text()
                 cy.log(producto)
 
                 if(producto.includes(this.datos.telefono1)){
                     cy.log('Se ha encontrado el elemento buscado '+this.datos.telefono1)
-                    cy.get('@contenedorDeProductos').eq(index)/*.find('button[onclick^="cart.add"]')*/.click()
+                    cy.get('@contenedorDeProductos').eq(index).find('button[aria-label="Add to Cart"]').click()
+                    cy.get('.alert').should('contain.text',this.datos.telefono1)
                 }
                 if(producto.includes(this.datos.telefono2)){
-                    cy.log('Se ha encontrado el elemento buscado'+this.datos.telefono2)
-                    cy.get('@contenedorDeProductos').eq(index)/*.find('button[onclick^="cart.add"]')*/.click()
+                    cy.log('Se ha encontrado el elemento buscado '+this.datos.telefono2)
+                    cy.get('@contenedorDeProductos').eq(index).find('button[aria-label="Add to Cart"]').click()
+                    cy.get('.alert').should('contain.text',this.datos.telefono2)
                 }
                 if(producto.includes(this.datos.telefono3)){
-                    cy.log('Se ha encontrado el elemento buscado'+this.datos.telefono3)
-                    cy.get('@contenedorDeProductos').eq(index)/*.find('button[onclick^="cart.add"]')*/.click()
+                    cy.log('Se ha encontrado el elemento buscado '+this.datos.telefono3)
+                    cy.get('@contenedorDeProductos').eq(index).find('button[aria-label="Add to Cart"]').click()
+                    cy.get('.alert').should('contain.text',this.datos.telefono3)
                 }
 
             })

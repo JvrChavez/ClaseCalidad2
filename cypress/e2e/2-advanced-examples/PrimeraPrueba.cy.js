@@ -14,7 +14,7 @@ describe('Primer conjunto de casos de prueba', function(){
         })
     */
     //caso de prueba 2
-    /*it('Agregar el elemento tipo blouse al carrito de compras desde la página principal', function(){
+    it('Agregar el elemento tipo blouse al carrito de compras desde la página principal', function(){
         cy.get('#homefeatured .product-container').as('ProductosPopulares')
         cy.get('@ProductosPopulares')
         .find('.product-name')
@@ -32,7 +32,7 @@ describe('Primer conjunto de casos de prueba', function(){
         cy.get('h2 > .ajax_cart_product_txt')
         .should('contain.text', 'There is 1 item in your cart.')
         .should('be.visible')
-        })*/
+        })
     //caso de prueba 3
         /*it("Verificamos que el drop down de women, tenga los elemtentos necesarios", function(){
 
@@ -62,7 +62,7 @@ describe('Primer conjunto de casos de prueba', function(){
     })*/
     
     //Caso de prueba 6
-    it('Crear una compra desde cero',function(){
+    /*it('Crear una compra desde cero',function(){
         cy.get('#search_query_top').type('Blouse');
         cy.get('#searchbox > .btn').click()
 
@@ -102,5 +102,5 @@ describe('Primer conjunto de casos de prueba', function(){
             }
         }
         
-    })
+    })*/
 })
