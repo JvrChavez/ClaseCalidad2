@@ -17,7 +17,6 @@ describe('Tercer feature de acass avanzados',function(){
         cy.get("div[class='product-thumb']").as("contenedorDeProductos")
         cy.get("@contenedorDeProductos")
         .find('.description')
-        //cy.get('div[class="product-thumb"]:has(.description)/*:contains(HTC Touch HD)')
         .each(($el, index, $list) => {
             cy.get('@contenedorDeProductos').eq(index).then(function($el1){
                 let producto = $el1.text()
