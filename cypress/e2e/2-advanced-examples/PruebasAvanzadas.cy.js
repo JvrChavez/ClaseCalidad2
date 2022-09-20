@@ -21,23 +21,16 @@ describe('Tercer feature de acass avanzados',function(){
             cy.get('@contenedorDeProductos').eq(index).then(function($el1){
                 let producto = $el1.text()
                 cy.log(producto)
-
-                if(producto.includes(this.datos.telefono1)){
-                    cy.log('Se ha encontrado el elemento buscado '+this.datos.telefono1)
-                    cy.get('@contenedorDeProductos').eq(index).find('button[aria-label="Add to Cart"]').click()
-                    cy.get('.alert').should('contain.text',this.datos.telefono1)
-                }
-                if(producto.includes(this.datos.telefono2)){
-                    cy.log('Se ha encontrado el elemento buscado '+this.datos.telefono2)
-                    cy.get('@contenedorDeProductos').eq(index).find('button[aria-label="Add to Cart"]').click()
-                    cy.get('.alert').should('contain.text',this.datos.telefono2)
-                }
-                if(producto.includes(this.datos.telefono3)){
-                    cy.log('Se ha encontrado el elemento buscado '+this.datos.telefono3)
-                    cy.get('@contenedorDeProductos').eq(index).find('button[aria-label="Add to Cart"]').click()
-                    cy.get('.alert').should('contain.text',this.datos.telefono3)
-                }
-
+                //Se toma el arreglo de los telefonos con un each
+                cy.get(this.datos.telefonos)
+                .each(($el2,index1,$list1)=>{
+                    //Se evalua si el telefono en cuestion es el correcto
+                    if(producto.includes(this.datos.telefonos[index1])){
+                        cy.log('Se ha encontrado el elemento buscado '+this.datos.telefonos[index1])
+                        cy.get('@contenedorDeProductos').eq(index).find('button[aria-label="Add to Cart"]').click()
+                        cy.get('.alert').should('contain.text',this.datos.telefonos[index1])
+                    }                    
+                })
             })
         })
     })
