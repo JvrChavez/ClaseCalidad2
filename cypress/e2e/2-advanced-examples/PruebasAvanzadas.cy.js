@@ -13,6 +13,8 @@ describe('Tercer feature de acass avanzados',function(){
     })
     //Caso 7
     it('Realizar compra de celulares basadas en su titulo',function(){
+        //Se agrega con un doble ciclo
+        /*
         cy.get("#menu ul a:contains('Phones & PDAs')").click()
         cy.get("div[class='product-thumb']").as("contenedorDeProductos")
         cy.get("@contenedorDeProductos")
@@ -32,6 +34,12 @@ describe('Tercer feature de acass avanzados',function(){
                     }                    
                 })
             })
-        })
+        })*/
+
+        //Aqui se agrega con funciones de comandos
+        cy.get("#menu ul a:contains('Phones & PDAs')").click()
+        cy.agregarElementosAlCarrito(this.datos.telefono1)
+        cy.agregarElementosAlCarrito(this.datos.telefono2)
+        cy.agregarElementosAlCarrito(this.datos.telefono3)
     })
 })

@@ -30,33 +30,7 @@ describe('Primer Examen',function(){
         .each(($el1, index, $list) => {
             cy.get('@contenedorDeProductos').eq((index)).then(function($el1){
                 let producto = $el1.text()
-                cy.log(producto)
-                /*if(producto.includes(this.datos.PC1)){
-                    cy.log('Se ha encontrado el elemento buscado '+this.datos.PC1)
-                    cy.get('@contenedorDeProductos').eq(index).find('button[id*="toBasket_productList-"]').click()
-                    cy.get('.bigtext').then(function($bigtext){
-                        let cantidad=$bigtext.text()
-                        if(cantidad.includes('2 artículos')){
-                            cy.get('.oxwidget_headerminibasket_tobasket').click()
-                            cy.get('.basketboxcount > span').should('contain.text','2')
-                        }else{
-                            cy.reload()
-                        }
-                    })                    
-                }                
-                if(producto.includes(this.datos.PC2)){
-                    cy.log('Se ha encontrado el elemento buscado'+this.datos.PC2)
-                    cy.get('@contenedorDeProductos').eq(index).find('button[id*="toBasket_productList-"]').click()
-                    cy.get('.bigtext').then(function($bigtext){
-                        let cantidad=$bigtext.text()
-                        if(cantidad.includes('2 artículos')){
-                            cy.get('.oxwidget_headerminibasket_tobasket').click()
-                            cy.get('.basketboxcount > span').should('contain.text','2')
-                        }else{
-                            cy.reload()
-                        }
-                    })
-                }*/
+                cy.log(producto)            
                 //Se toma el arreglo de los telefonos con un each
                 cy.get(this.datos.PCS)
                 .each(($el2,index1,$list1)=>{
