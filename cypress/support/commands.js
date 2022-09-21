@@ -62,6 +62,61 @@ Cypress.Commands.add("agregarArregloAlCarrito",(nombreDeProducto)=>{
             })
         })
 })
+Cypress.Commands.add('pruebasDataDriven',(nombre,apellido,email,sexo,numero)=>{
+    cy.get('#firstName').type(nombre)
+    cy.get('#lastName').type(apellido)
+    cy.get('#userEmail').type(email)
+    cy.get('input[name="gender"][value='+sexo+']').check({force:true}).should('be.checked')
+        cy.get('#userNumber').type(numero)
+    cy.get('#submit').click({force:true})
+    cy.get('#example-modal-sizes-title-lg').should('have.text','Thanks for submitting the form')
+        cy.get('td:contains(Student Name)+td')
+        .should('have.text',nombre+" "+apellido)
+        cy.get('td:contains(Student Email)+td').should('have.text',email)
+        cy.get('td:contains(Gender)+td').should('have.text',this.datos.sexo)
+        cy.get('td:contains(Mobile)+td').should('have.text',this.datos.telefono)
+})
+Cypress.Commands.add('compraDesdeCeroPrimeraPrueba',(articulo,precio)=>{
+    cy.get('#search_query_top').type(articulo);
+        cy.get('#searchbox > .btn').click()
+
+        if (cy.get('.right-block > h5 > .product-name').should('contain.text',articulo)) {
+            cy.wait(4000)
+            cy.log('Se valido que el articulo sea '+articulo)
+            cy.get('.ajax_add_to_cart_button > span').click()
+
+            cy.get('.button-container > .button-medium > span').click()
+            cy.log('Entramos al carrito')
+
+            if(cy.get('.cart_description > .product-name > a').should('contain.text',articulo) &&
+            cy.get('#product_price_2_7_0 > .price').should('contain.text',precio)){
+                cy.log('Verificamos el articulo y precio del carrito')
+                cy.get('.cart_navigation > .button > span').click()
+                cy.log('Proseguimos despues de verificar articulo y precio')
+
+                cy.get('#email').type('chavezj1941@gmail.com')
+                cy.get('#passwd').type('123456')
+                cy.get('#SubmitLogin > span').click()
+                cy.log('Hacemos log in')
+
+                cy.get('.cart_navigation > .button > span').click()
+                cy.log('Confirmamos nuestra direccion')
+
+                cy.get('#cgv').check().should('be.checked')
+                cy.get('.cart_navigation > .button > span').click()
+                cy.log('Hacemos check en terminos y condiciones')
+
+                cy.get('.bankwire').click()
+                cy.log('Seleccionamos metodo de pago')
+
+                cy.get('#cart_navigation > .button > span').click()
+                cy.log('Confirmamos la orden')
+
+                cy.get('.cheque-indent > .dark').should('contain.text','complete')
+                cy.log('Verificamos el texto de orden completada')   
+            }
+        }
+})
 Cypress.Commands.add("agregarArregloCarritoCyberpuerta",(arregloDeProductos)=>{
     cy.get('.emproduct').as("contenedorDeProductos")
         cy.get("@contenedorDeProductos")

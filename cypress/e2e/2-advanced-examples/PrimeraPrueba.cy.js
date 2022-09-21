@@ -4,6 +4,12 @@
 
 //suite de casos
 describe('Primer conjunto de casos de prueba', function(){
+    before(function(){
+        //Cargamos los valores del archivo example.json en un objeto de datos
+        cy.fixture('primeraPrueba').then(function(datos){
+            this.datos=datos
+        })
+    })
     beforeEach(()=>{
         cy.visit("http://automationpractice.com/index.php")
     })
@@ -14,7 +20,7 @@ describe('Primer conjunto de casos de prueba', function(){
         })
     */
     //caso de prueba 2
-    it('Agregar el elemento tipo blouse al carrito de compras desde la página principal', function(){
+    /*it('Agregar el elemento tipo blouse al carrito de compras desde la página principal', function(){
         cy.get('#homefeatured .product-container').as('ProductosPopulares')
         cy.get('@ProductosPopulares')
         .find('.product-name')
@@ -32,7 +38,7 @@ describe('Primer conjunto de casos de prueba', function(){
         cy.get('h2 > .ajax_cart_product_txt')
         .should('contain.text', 'There is 1 item in your cart.')
         .should('be.visible')
-        })
+        })*/
     //caso de prueba 3
         /*it("Verificamos que el drop down de women, tenga los elemtentos necesarios", function(){
 
@@ -103,4 +109,9 @@ describe('Primer conjunto de casos de prueba', function(){
         }
         
     })*/
+
+    //Con comandos
+    it('Caso de prueba 6 desde comandos',function(){
+        cy.compraDesdeCeroPrimeraPrueba(this.datos.articulo,this.datos.precio)
+    })
 })

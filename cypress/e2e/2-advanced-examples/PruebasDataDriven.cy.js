@@ -15,7 +15,10 @@ describe('Segundo conjunto de casos de pruebas avanzadas',function(){
     })
 
     it('Llenamos nuestro primer formulario utiizando data',function(){
-        cy.get('#firstName').type(this.datos.nombre)
+        //Con comandos
+        cy.pruebasDataDriven(this.datos.nombre,this.datos.apellido,this.datos.email,this.datos.sexo,this.datos.telefono)
+
+        /*cy.get('#firstName').type(this.datos.nombre)
         cy.get('#lastName').type(this.datos.apellido)
         cy.get('#userEmail').type(this.datos.email)
         cy.get('input[name="gender"][value='+this.datos.sexo+']').check({force:true}).should('be.checked')
@@ -69,7 +72,7 @@ describe('Segundo conjunto de casos de pruebas avanzadas',function(){
         cy.get('td:contains(Hobbies)+td').should('have.text',this.datos.hobbies[0]+", "+this.datos.hobbies[1])
         cy.get('td:contains(Address)+td').should('have.text',this.datos.direccion)
         cy.get('td:contains(State and City)+td').should('have.text',this.datos.estado+" "+this.datos.ciudad)
-        //Prueba para ver que github funciona
+        //Prueba para ver que github funciona*/
 
     })
 })
