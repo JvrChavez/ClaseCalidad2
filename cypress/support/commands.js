@@ -41,3 +41,53 @@ Cypress.Commands.add("agregarElementosAlCarrito",(nombreDeProducto)=>{
         })
     })
 })
+Cypress.Commands.add("agregarArregloAlCarrito",(nombreDeProducto)=>{
+    cy.get("div[class='product-thumb']").as("contenedorDeProductos")
+        cy.get("@contenedorDeProductos")
+        .find('.description')
+        .each(($el, index, $list) => {
+            cy.get('@contenedorDeProductos').eq(index).then(function($el1){
+                let producto = $el1.text()
+                cy.log(producto)
+                //Se toma el arreglo de los telefonos con un each
+                cy.get(nombreDeProducto)
+                .each(($el2,index1,$list1)=>{
+                    //Se evalua si el telefono en cuestion es el correcto
+                    if(producto.includes(nombreDeProducto[index1])){
+                        cy.log('Se ha encontrado el elemento buscado '+nombreDeProducto[index1])
+                        cy.get('@contenedorDeProductos').eq(index).find('button[aria-label="Add to Cart"]').click()
+                        cy.get('.alert').should('contain.text',nombreDeProducto[index1])
+                    }                    
+                })
+            })
+        })
+})
+Cypress.Commands.add("agregarArregloCarritoCyberpuerta",(arregloDeProductos)=>{
+    cy.get('.emproduct').as("contenedorDeProductos")
+        cy.get("@contenedorDeProductos")
+        .find('[id*=productList]')
+        .each(($el1, index, $list) => {
+            cy.get('@contenedorDeProductos').eq((index)).then(function($el1){
+                let producto = $el1.text()
+                cy.log(producto)            
+                //Se toma el arreglo de los telefonos con un each
+                cy.get(arregloDeProductos)
+                .each(($el2,index1,$list1)=>{
+                    //Se evalua si el telefono en cuestion es el correcto
+                    if(producto.includes(arregloDeProductos[index1])){
+                        cy.log('Se ha encontrado el elemento buscado '+arregloDeProductos[index1])
+                        cy.get('@contenedorDeProductos').eq(index).find('button[id*="toBasket_productList-"]').click()
+                        cy.get('.bigtext').then(function($bigtext){
+                            let cantidad=$bigtext.text()
+                            if(cantidad.includes('2 artículos')){
+                                cy.get('.oxwidget_headerminibasket_tobasket').click()
+                                cy.get('.basketboxcount > span').should('contain.text','2')
+                            }else{
+                                cy.reload()
+                            }
+                        })                    
+                    }                    
+                })
+            })
+        })
+})

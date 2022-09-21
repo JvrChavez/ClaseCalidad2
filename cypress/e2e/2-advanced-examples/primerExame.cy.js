@@ -22,9 +22,12 @@ describe('Primer Examen',function(){
         cy.wait(3000)
         cy.get('div[class^="cp-pf-cklist"').contains('label','APPLE').parent().find('input').check({force:true})
         cy.get('div[class^="cp-pf-cklist"').contains('label','En existencia').parent().find('input').check({force:true})
+
+        //Prueba con comandos
+        cy.agregarArregloCarritoCyberpuerta(this.datos.PCS)
         
         //Test del Pruebas Avanzadas
-        cy.get('.emproduct').as("contenedorDeProductos")
+        /*cy.get('.emproduct').as("contenedorDeProductos")
         cy.get("@contenedorDeProductos")
         .find('[id*=productList]')
         .each(($el1, index, $list) => {
@@ -50,7 +53,7 @@ describe('Primer Examen',function(){
                     }                    
                 })
             })
-        })//Aqui termina lo de PruebasAvanzadas
+        })*///Aqui termina lo de PruebasAvanzadas
         
         //Esto fue parte del examen
         /*//Verificamos que el producto sea Apple (Parte del examen)

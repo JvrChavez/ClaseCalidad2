@@ -36,10 +36,14 @@ describe('Tercer feature de acass avanzados',function(){
             })
         })*/
 
-        //Aqui se agrega con funciones de comandos
-        cy.get("#menu ul a:contains('Phones & PDAs')").click()
+        //Se agrega con funciones de comandos uno por uno
+        /*cy.get("#menu ul a:contains('Phones & PDAs')").click()
         cy.agregarElementosAlCarrito(this.datos.telefono1)
         cy.agregarElementosAlCarrito(this.datos.telefono2)
-        cy.agregarElementosAlCarrito(this.datos.telefono3)
+        cy.agregarElementosAlCarrito(this.datos.telefono3)*/
+
+        //Se agrega con comandos de arreglos
+        cy.get("#menu ul a:contains('Phones & PDAs')").click()
+        cy.agregarArregloAlCarrito(this.datos.telefonos)
     })
 })
