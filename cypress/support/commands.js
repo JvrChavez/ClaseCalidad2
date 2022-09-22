@@ -62,19 +62,60 @@ Cypress.Commands.add("agregarArregloAlCarrito",(nombreDeProducto)=>{
             })
         })
 })
-Cypress.Commands.add('pruebasDataDriven',(nombre,apellido,email,sexo,numero)=>{
-    cy.get('#firstName').type(nombre)
-    cy.get('#lastName').type(apellido)
-    cy.get('#userEmail').type(email)
-    cy.get('input[name="gender"][value='+sexo+']').check({force:true}).should('be.checked')
-        cy.get('#userNumber').type(numero)
-    cy.get('#submit').click({force:true})
-    cy.get('#example-modal-sizes-title-lg').should('have.text','Thanks for submitting the form')
+Cypress.Commands.add('pruebasDataDriven',(campos,imagen)=>{ 
+    let claves=Object.keys(campos)
+    cy.log(campos['nombre'])
+    cy.get('#firstName').type(campos['nombre'])
+        cy.get('#lastName').type(campos ['apellido'])
+        cy.get('#userEmail').type(campos ['email'])
+        cy.get('input[name="gender"][value='+campos ['sexo']+']').check({force:true}).should('be.checked')
+        cy.get('#userNumber').type(campos ['telefono'])
+        cy.get('#dateOfBirthInput').click()
+        cy.get('.react-datepicker__month-select').should('be.visible').select(campos ['fechaDeNacimiento'][0])
+        cy.get('.react-datepicker__year-select').should('be.visible').select(campos ['fechaDeNacimiento'][1])
+        cy.get('.react-datepicker__day--0'+campos ['fechaDeNacimiento'][2]).should('be.visible').click()
+        cy.get('#dateOfBirthInput')
+            .should('contain.value',campos ['fechaDeNacimiento'][0].substring(0,3))
+            .should('contain.value',campos ['fechaDeNacimiento'][1])
+            .should('contain.value',campos ['fechaDeNacimiento'][2])
+            cy.get('.subjects-auto-complete__value-container').type(campos ['materia'])
+            cy.get('div[id^="react-select-"]').click()
+            cy.get('.subjects-auto-complete__value-container').should('contain.text',campos ['materia'])
+        cy.get('div[class^="custom-control"').contains('label',campos ['hobbies'][0]).parent().find('input').check({force:true})
+        cy.get('div[class^="custom-control"').contains('label',campos ['hobbies'][1]).parent().find('input').check({force:true})
+        cy.get('#uploadPicture').then(function($el){
+            //Convertir la imagen en un string de base64
+            const blob=Cypress.Blob.base64StringToBlob(imagen,'image/png')
+
+            const file= new File([blob],campos ['imagen'],{type:'image/png'})
+            const list=new DataTransfer()
+
+            list.items.add(file)
+            const myFileList=list.files
+
+            $el[0].files=myFileList
+            $el[0].dispatchEvent(new Event ('charge',{bubbles:true}))
+        })
+        cy.get('#currentAddress').type(campos ['direccion'])
+        cy.get('div[class=" css-yk16xz-control"]').click({force:true})
+        cy.get('div[class*=" css-26l3qy-menu"]').contains(campos ['estado']).click({force:true})
+        cy.get('div[class=" css-yk16xz-control"]').click({force:true})
+        cy.get('div[class=" css-26l3qy-menu"]').contains(campos ['ciudad']).click({force:true})
+        cy.get('#submit').click({force:true})
+        //Aserciones
+        cy.get('#example-modal-sizes-title-lg').should('have.text','Thanks for submitting the form')
         cy.get('td:contains(Student Name)+td')
-        .should('have.text',nombre+" "+apellido)
-        cy.get('td:contains(Student Email)+td').should('have.text',email)
-        cy.get('td:contains(Gender)+td').should('have.text',this.datos.sexo)
-        cy.get('td:contains(Mobile)+td').should('have.text',this.datos.telefono)
+        .should('have.text',campos ['nombre']+" "+campos ['apellido'])
+        cy.get('td:contains(Student Email)+td').should('have.text',campos ['email'])
+        cy.get('td:contains(Gender)+td').should('have.text',campos ['sexo'])
+        cy.get('td:contains(Mobile)+td').should('have.text',campos ['telefono'])
+        cy.get('td:contains(Date of Birth)+td')
+        .should('have.text',campos ['fechaDeNacimiento'][2]+" "+
+        campos ['fechaDeNacimiento'][0]+","+campos ['fechaDeNacimiento'][1])
+        cy.get('td:contains(Subjects)+td').should('have.text',campos ['materia'])
+        cy.get('td:contains(Hobbies)+td').should('have.text',campos ['hobbies'][0]+", "+campos ['hobbies'][1])
+        cy.get('td:contains(Address)+td').should('have.text',campos ['direccion'])
+        cy.get('td:contains(State and City)+td').should('have.text',campos ['estado']+" "+campos ['ciudad'])
 })
 Cypress.Commands.add('compraDesdeCeroPrimeraPrueba',(articulo,precio)=>{
     cy.get('#search_query_top').type(articulo);

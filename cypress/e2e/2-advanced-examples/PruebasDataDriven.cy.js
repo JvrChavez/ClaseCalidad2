@@ -16,7 +16,7 @@ describe('Segundo conjunto de casos de pruebas avanzadas',function(){
 
     it('Llenamos nuestro primer formulario utiizando data',function(){
         //Con comandos
-        cy.pruebasDataDriven(this.datos.nombre,this.datos.apellido,this.datos.email,this.datos.sexo,this.datos.telefono)
+        cy.pruebasDataDriven(this.datos.campos,this.imagen)
 
         /*cy.get('#firstName').type(this.datos.nombre)
         cy.get('#lastName').type(this.datos.apellido)
@@ -52,7 +52,7 @@ describe('Segundo conjunto de casos de pruebas avanzadas',function(){
         })
         cy.get('#currentAddress').type(this.datos.direccion)
 
-        cy.get('#state').click()
+        cy.get('#state').click({force:true})
         cy.get('div[class*=" css-26l3qy-menu"]').contains(this.datos.estado).click()
         cy.get('#city').click()
         cy.get('div[class*="menu"]').contains(this.datos.ciudad).click()
@@ -71,8 +71,8 @@ describe('Segundo conjunto de casos de pruebas avanzadas',function(){
         cy.get('td:contains(Subjects)+td').should('have.text',this.datos.materia)
         cy.get('td:contains(Hobbies)+td').should('have.text',this.datos.hobbies[0]+", "+this.datos.hobbies[1])
         cy.get('td:contains(Address)+td').should('have.text',this.datos.direccion)
-        cy.get('td:contains(State and City)+td').should('have.text',this.datos.estado+" "+this.datos.ciudad)
-        //Prueba para ver que github funciona*/
+        cy.get('td:contains(State and City)+td').should('have.text',this.datos.estado+" "+this.datos.ciudad)*/
+        //Prueba para ver que github funciona
 
     })
 })
