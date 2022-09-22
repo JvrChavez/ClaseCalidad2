@@ -62,7 +62,7 @@ Cypress.Commands.add("agregarArregloAlCarrito",(nombreDeProducto)=>{
             })
         })
 })
-Cypress.Commands.add('pruebasDataDriven',(campos,imagen)=>{ 
+Cypress.Commands.add('pruebasDataDriven',(campos,imagen)=>{
     let claves=Object.keys(campos)
     cy.log(campos['nombre'])
     cy.get('#firstName').type(campos['nombre'])
